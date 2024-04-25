@@ -1,0 +1,1657 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "OpenAI Assistants",
+    "description": "Azure OpenAI Assistants API. Endpoints include assistants, threads and messages",
+    "version": "1.0"
+  },
+  "host": "YOUR_RESOURCE_NAME.openai.azure.com",
+  "basePath": "/",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [],
+  "produces": [],
+  "paths": {
+    "/openai/assistants": {
+      "post": {
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        },
+        "summary": "Create Assistant",
+        "description": "Create an assistant with a model and instructions.",
+        "operationId": "CreateAssistant",
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "default": "2024-02-15-preview"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "default": "application/json"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "name",
+                  "title": ""
+                },
+                "description": {
+                  "type": "string",
+                  "description": "description"
+                },
+                "file_ids": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "file_ids"
+                },
+                "instructions": {
+                  "type": "string",
+                  "description": "instructions"
+                },
+                "tools": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "type": "string",
+                        "description": "type"
+                      }
+                    }
+                  },
+                  "description": "tools"
+                },
+                "model": {
+                  "type": "string",
+                  "description": "model",
+                  "title": ""
+                },
+                "metadata": {
+                  "type": "object",
+                  "properties": {},
+                  "description": "metadata"
+                }
+              },
+              "required": [
+                "name",
+                "model"
+              ]
+            }
+          }
+        ]
+      },
+      "get": {
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "object": {
+                  "type": "string",
+                  "description": "object"
+                },
+                "assistants": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "description": "id"
+                      },
+                      "object": {
+                        "type": "string",
+                        "description": "object"
+                      },
+                      "created_at": {
+                        "type": "integer",
+                        "format": "int32",
+                        "description": "created_at"
+                      },
+                      "name": {
+                        "type": "string",
+                        "description": "name"
+                      },
+                      "description": {
+                        "type": "string",
+                        "description": "description"
+                      },
+                      "model": {
+                        "type": "string",
+                        "description": "model"
+                      },
+                      "instructions": {
+                        "type": "string",
+                        "description": "instructions"
+                      },
+                      "tools": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "type": {
+                              "type": "string",
+                              "description": "type"
+                            }
+                          }
+                        },
+                        "description": "tools"
+                      },
+                      "file_ids": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "file_ids"
+                      },
+                      "metadata": {
+                        "type": "object",
+                        "properties": {},
+                        "description": "metadata"
+                      }
+                    }
+                  },
+                  "description": "assistants"
+                },
+                "first_id": {
+                  "type": "string",
+                  "description": "first_id"
+                },
+                "last_id": {
+                  "type": "string",
+                  "description": "last_id"
+                },
+                "has_more": {
+                  "type": "boolean",
+                  "description": "has_more"
+                }
+              }
+            }
+          }
+        },
+        "summary": "List Assistants",
+        "description": "List all assistants",
+        "operationId": "GetAssistants",
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "default": "2024-02-15-preview",
+            "enum": [
+              "2024-02-15-preview"
+            ]
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "default": "application/json"
+          }
+        ]
+      }
+    },
+    "/openai/assistants/{assistant_id}/files": {
+      "post": {
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "id"
+                },
+                "object": {
+                  "type": "string",
+                  "description": "object"
+                },
+                "created_at": {
+                  "type": "integer",
+                  "format": "int32",
+                  "description": "created_at"
+                },
+                "assistant_id": {
+                  "type": "string",
+                  "description": "assistant_id"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Create assistant file",
+        "description": "Create an assistant file by attaching a File to an assistant.",
+        "operationId": "CreateAssistantFile",
+        "parameters": [
+          {
+            "name": "assistant_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "default": "2024-02-15-preview"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "default": "application/json"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "file_id": {
+                  "type": "string",
+                  "description": "file_id",
+                  "title": ""
+                }
+              },
+              "required": [
+                "file_id"
+              ]
+            }
+          }
+        ]
+      },
+      "get": {
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        },
+        "summary": "List Assistants Files",
+        "description": "Lists the uploaded files metadata associated with a specific assistant",
+        "operationId": "GetAssistantFiles",
+        "parameters": [
+          {
+            "name": "assistant_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "default": "2024-02-15-preview"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "default": "application/json"
+          }
+        ]
+      }
+    },
+    "/openai/assistants/{assistant_id}": {
+      "delete": {
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "id"
+                },
+                "object": {
+                  "type": "string",
+                  "description": "object"
+                },
+                "deleted": {
+                  "type": "boolean",
+                  "description": "deleted"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Delete assistant",
+        "description": "Delete an assistant.",
+        "operationId": "DeleteAssistant",
+        "parameters": [
+          {
+            "name": "assistant_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "default": "2024-02-15-preview"
+          }
+        ]
+      },
+      "get": {
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "id"
+                },
+                "object": {
+                  "type": "string",
+                  "description": "object"
+                },
+                "created_at": {
+                  "type": "integer",
+                  "format": "int32",
+                  "description": "created_at"
+                },
+                "name": {
+                  "type": "string",
+                  "description": "name"
+                },
+                "description": {
+                  "type": "string",
+                  "description": "description"
+                },
+                "model": {
+                  "type": "string",
+                  "description": "model"
+                },
+                "instructions": {
+                  "type": "string",
+                  "description": "instructions"
+                },
+                "tools": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "type": "string",
+                        "description": "type"
+                      }
+                    }
+                  },
+                  "description": "tools"
+                },
+                "file_ids": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "file_ids"
+                },
+                "metadata": {
+                  "type": "object",
+                  "properties": {},
+                  "description": "metadata"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Retrieve assistant",
+        "description": "Retrieves an assistant.",
+        "operationId": "GetAssistant",
+        "parameters": [
+          {
+            "name": "assistant_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "default": "2024-02-15-preview"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "default": "application/json"
+          }
+        ]
+      },
+      "post": {
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "id"
+                },
+                "object": {
+                  "type": "string",
+                  "description": "object"
+                },
+                "created_at": {
+                  "type": "integer",
+                  "format": "int32",
+                  "description": "created_at"
+                },
+                "name": {
+                  "type": "string",
+                  "description": "name"
+                },
+                "description": {
+                  "type": "string",
+                  "description": "description"
+                },
+                "model": {
+                  "type": "string",
+                  "description": "model"
+                },
+                "instructions": {
+                  "type": "string",
+                  "description": "instructions"
+                },
+                "tools": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "type": "string",
+                        "description": "type"
+                      }
+                    }
+                  },
+                  "description": "tools"
+                },
+                "file_ids": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "file_ids"
+                },
+                "metadata": {
+                  "type": "object",
+                  "properties": {},
+                  "description": "metadata"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Modify assistant",
+        "description": "Modifies an assistant.",
+        "operationId": "UpdateAssistant",
+        "parameters": [
+          {
+            "name": "assistant_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "default": "2024-02-15-preview"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "default": "application/json"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "id"
+                },
+                "object": {
+                  "type": "string",
+                  "description": "object"
+                },
+                "created_at": {
+                  "type": "integer",
+                  "format": "int32",
+                  "description": "created_at"
+                },
+                "name": {
+                  "type": "string",
+                  "description": "name"
+                },
+                "description": {
+                  "type": "string",
+                  "description": "description"
+                },
+                "model": {
+                  "type": "string",
+                  "description": "model"
+                },
+                "instructions": {
+                  "type": "string",
+                  "description": "instructions"
+                },
+                "tools": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "type": "string",
+                        "description": "type"
+                      }
+                    }
+                  },
+                  "description": "tools"
+                },
+                "file_ids": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "file_ids"
+                },
+                "metadata": {
+                  "type": "object",
+                  "properties": {},
+                  "description": "metadata"
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    "/openai/assistants/{assistant_id}/files/{file-id}": {
+      "delete": {
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "id"
+                },
+                "object": {
+                  "type": "string",
+                  "description": "object"
+                },
+                "deleted": {
+                  "type": "boolean",
+                  "description": "deleted"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Delete assistant file",
+        "description": "Delete an assistant file.",
+        "operationId": "DeleteAssistantFile",
+        "parameters": [
+          {
+            "name": "assistant_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "file-id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "default": "2024-02-15-preview"
+          }
+        ]
+      },
+      "get": {
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "id"
+                },
+                "object": {
+                  "type": "string",
+                  "description": "object"
+                },
+                "created_at": {
+                  "type": "integer",
+                  "format": "int32",
+                  "description": "created_at"
+                },
+                "assistant_id": {
+                  "type": "string",
+                  "description": "assistant_id"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Retrieve assistant file",
+        "description": "Retrieves an Assistant file.",
+        "operationId": "GetAssistantFile",
+        "parameters": [
+          {
+            "name": "assistant_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "file-id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "default": "2024-02-15-preview"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "default": "application/json"
+          }
+        ]
+      }
+    },
+    "/openai/files": {},
+    "/openai/files/{file-id}": {
+      "get": {
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "bytes": {
+                  "type": "integer",
+                  "format": "int32",
+                  "description": "bytes"
+                },
+                "purpose": {
+                  "type": "string",
+                  "description": "purpose"
+                },
+                "filename": {
+                  "type": "string",
+                  "description": "filename"
+                },
+                "id": {
+                  "type": "string",
+                  "description": "id"
+                },
+                "status": {
+                  "type": "string",
+                  "description": "status"
+                },
+                "created_at": {
+                  "type": "integer",
+                  "format": "int32",
+                  "description": "created_at"
+                },
+                "object": {
+                  "type": "string",
+                  "description": "object"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get File Details",
+        "description": "Gets details for a single file specified by the given file-id including status, size, purpose, etc.",
+        "operationId": "GetFileDetails",
+        "parameters": [
+          {
+            "name": "file-id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "default": "2024-02-15-preview"
+          }
+        ]
+      }
+    },
+    "/openai/threads": {
+      "post": {
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "id"
+                },
+                "object": {
+                  "type": "string",
+                  "description": "object"
+                },
+                "created_at": {
+                  "type": "integer",
+                  "format": "int32",
+                  "description": "created_at"
+                },
+                "metadata": {
+                  "type": "object",
+                  "properties": {},
+                  "description": "metadata"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Create a thread",
+        "description": "Create a thread",
+        "operationId": "CreateThread",
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "default": "2024-02-15-preview"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "default": "application/json"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "messages": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "description": "",
+                    "title": "message"
+                  },
+                  "description": "messages"
+                },
+                "metadata": {
+                  "type": "object",
+                  "properties": {},
+                  "description": "metadata"
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    "/openai/threads/{thread_id}": {
+      "delete": {
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "id"
+                },
+                "object": {
+                  "type": "string",
+                  "description": "object"
+                },
+                "deleted": {
+                  "type": "boolean",
+                  "description": "deleted"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Delete thread",
+        "description": "Delete a thread",
+        "operationId": "DeleteThread",
+        "parameters": [
+          {
+            "name": "thread_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "default": "2024-02-15-preview"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "default": "application/json"
+          }
+        ]
+      },
+      "get": {
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "id"
+                },
+                "object": {
+                  "type": "string",
+                  "description": "object"
+                },
+                "created_at": {
+                  "type": "integer",
+                  "format": "int32",
+                  "description": "created_at"
+                },
+                "metadata": {
+                  "type": "object",
+                  "properties": {},
+                  "description": "metadata"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Retrieve thread",
+        "description": "Retrieves a thread.",
+        "operationId": "GetThread",
+        "parameters": [
+          {
+            "name": "thread_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "default": "2024-02-15-preview"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "default": "application/json"
+          }
+        ]
+      }
+    },
+    "/openai/threads/{thread_id}/messages": {
+      "post": {
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "id"
+                },
+                "object": {
+                  "type": "string",
+                  "description": "object"
+                },
+                "created_at": {
+                  "type": "integer",
+                  "format": "int32",
+                  "description": "created_at"
+                },
+                "thread_id": {
+                  "type": "string",
+                  "description": "thread_id"
+                },
+                "role": {
+                  "type": "string",
+                  "description": "role"
+                },
+                "content": {
+                  "type": "string",
+                  "description": "content"
+                },
+                "assistant_id": {
+                  "type": "string",
+                  "description": "assistant_id"
+                },
+                "run_id": {
+                  "type": "string",
+                  "description": "run_id"
+                },
+                "file_ids": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "file_ids"
+                },
+                "metadata": {
+                  "type": "object",
+                  "properties": {},
+                  "description": "metadata"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Create message",
+        "description": "Create a message.",
+        "operationId": "CreateMessage",
+        "parameters": [
+          {
+            "name": "thread_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "default": "2024-02-15-preview"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "default": "application/json"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "role": {
+                  "type": "string",
+                  "description": "role",
+                  "title": "",
+                  "default": "user",
+                  "enum": [
+                    "user"
+                  ]
+                },
+                "content": {
+                  "type": "string",
+                  "description": "content",
+                  "title": ""
+                },
+                "file_ids": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "file_ids"
+                },
+                "metadata": {
+                  "type": "object",
+                  "properties": {},
+                  "description": "metadata"
+                }
+              },
+              "required": [
+                "content"
+              ]
+            }
+          }
+        ]
+      },
+      "get": {
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "messages": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "description": "id"
+                      },
+                      "assistant_id": {
+                        "type": "string",
+                        "description": "assistant_id"
+                      },
+                      "content": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "text": {
+                              "type": "object",
+                              "properties": {
+                                "annotations": {
+                                  "type": "array",
+                                  "items": {},
+                                  "description": "annotations"
+                                },
+                                "value": {
+                                  "type": "string",
+                                  "description": "value"
+                                }
+                              },
+                              "description": "text"
+                            },
+                            "type": {
+                              "type": "string",
+                              "description": "type"
+                            },
+                            "image_file": {
+                              "type": "object",
+                              "properties": {
+                                "file_id": {
+                                  "type": "string",
+                                  "description": "file_id"
+                                }
+                              },
+                              "description": "image_file"
+                            }
+                          }
+                        },
+                        "description": "content"
+                      },
+                      "created_at": {
+                        "type": "integer",
+                        "format": "int32",
+                        "description": "created_at"
+                      },
+                      "file_ids": {
+                        "type": "array",
+                        "items": {},
+                        "description": "file_ids"
+                      },
+                      "metadata": {
+                        "type": "object",
+                        "properties": {},
+                        "description": "metadata"
+                      },
+                      "object": {
+                        "type": "string",
+                        "description": "object"
+                      },
+                      "role": {
+                        "type": "string",
+                        "description": "role"
+                      },
+                      "run_id": {
+                        "type": "string",
+                        "description": "run_id"
+                      },
+                      "thread_id": {
+                        "type": "string",
+                        "description": "thread_id"
+                      }
+                    }
+                  },
+                  "description": "messages"
+                },
+                "object": {
+                  "type": "string",
+                  "description": "object"
+                },
+                "first_id": {
+                  "type": "string",
+                  "description": "first_id"
+                },
+                "last_id": {
+                  "type": "string",
+                  "description": "last_id"
+                },
+                "has_more": {
+                  "type": "boolean",
+                  "description": "has_more"
+                }
+              }
+            }
+          }
+        },
+        "summary": "List messages",
+        "description": "Returns a list of messages for a given thread.",
+        "operationId": "GetMessages",
+        "parameters": [
+          {
+            "name": "thread_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "default": "2024-02-15-preview"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "description": "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20."
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "asc",
+              "desc"
+            ],
+            "description": "Sort order by the created_at timestamp of the objects. asc for ascending order and desc for descending order."
+          },
+          {
+            "name": "after",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "A cursor for use in pagination. after is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of the list."
+          },
+          {
+            "name": "before",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list."
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "default": "application/json"
+          }
+        ]
+      }
+    },
+    "/openai/threads/{thread_id}/runs": {
+      "post": {
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "id"
+                },
+                "object": {
+                  "type": "string",
+                  "description": "object"
+                },
+                "created_at": {
+                  "type": "integer",
+                  "format": "int32",
+                  "description": "created_at"
+                },
+                "assistant_id": {
+                  "type": "string",
+                  "description": "assistant_id"
+                },
+                "thread_id": {
+                  "type": "string",
+                  "description": "thread_id"
+                },
+                "status": {
+                  "type": "string",
+                  "description": "status"
+                },
+                "started_at": {
+                  "type": "string",
+                  "description": "started_at"
+                },
+                "expires_at": {
+                  "type": "integer",
+                  "format": "int32",
+                  "description": "expires_at"
+                },
+                "cancelled_at": {
+                  "type": "string",
+                  "description": "cancelled_at"
+                },
+                "failed_at": {
+                  "type": "string",
+                  "description": "failed_at"
+                },
+                "completed_at": {
+                  "type": "string",
+                  "description": "completed_at"
+                },
+                "last_error": {
+                  "type": "string",
+                  "description": "last_error"
+                },
+                "model": {
+                  "type": "string",
+                  "description": "model"
+                },
+                "instructions": {
+                  "type": "string",
+                  "description": "instructions"
+                },
+                "tools": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "type": "string",
+                        "description": "type"
+                      }
+                    }
+                  },
+                  "description": "tools"
+                },
+                "file_ids": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "file_ids"
+                },
+                "metadata": {
+                  "type": "object",
+                  "properties": {},
+                  "description": "metadata"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Create run",
+        "description": "Create a run.",
+        "operationId": "CreateRun",
+        "parameters": [
+          {
+            "name": "thread_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "default": "2024-02-15-preview"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "default": "application/json"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "assistant_id": {
+                  "type": "string",
+                  "description": "assistant_id",
+                  "title": ""
+                },
+                "model": {
+                  "type": "string",
+                  "description": "model"
+                },
+                "instructions": {
+                  "type": "string",
+                  "description": "instructions"
+                },
+                "tools": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "tools"
+                },
+                "metadata": {
+                  "type": "object",
+                  "properties": {},
+                  "description": "metadata"
+                }
+              },
+              "required": [
+                "assistant_id"
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "/openai/threads/{thread_id}/runs/{run_id}": {
+      "get": {
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "id"
+                },
+                "object": {
+                  "type": "string",
+                  "description": "object"
+                },
+                "created_at": {
+                  "type": "integer",
+                  "format": "int32",
+                  "description": "created_at"
+                },
+                "assistant_id": {
+                  "type": "string",
+                  "description": "assistant_id"
+                },
+                "thread_id": {
+                  "type": "string",
+                  "description": "thread_id"
+                },
+                "status": {
+                  "type": "string",
+                  "description": "status"
+                },
+                "started_at": {
+                  "type": "integer",
+                  "format": "int32",
+                  "description": "started_at"
+                },
+                "expires_at": {
+                  "type": "string",
+                  "description": "expires_at"
+                },
+                "cancelled_at": {
+                  "type": "string",
+                  "description": "cancelled_at"
+                },
+                "failed_at": {
+                  "type": "string",
+                  "description": "failed_at"
+                },
+                "completed_at": {
+                  "type": "integer",
+                  "format": "int32",
+                  "description": "completed_at"
+                },
+                "last_error": {
+                  "type": "string",
+                  "description": "last_error"
+                },
+                "model": {
+                  "type": "string",
+                  "description": "model"
+                },
+                "instructions": {
+                  "type": "string",
+                  "description": "instructions"
+                },
+                "tools": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "type": "string",
+                        "description": "type"
+                      }
+                    }
+                  },
+                  "description": "tools"
+                },
+                "file_ids": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "file_ids"
+                },
+                "metadata": {
+                  "type": "object",
+                  "properties": {},
+                  "description": "metadata"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Retrieve run",
+        "description": "Retrieves a run.",
+        "operationId": "GetRun",
+        "parameters": [
+          {
+            "name": "thread_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "run_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "default": "2024-02-15-preview"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "default": "application/json"
+          }
+        ]
+      }
+    },
+    "/openai/threads/{thread_id}/runs/{run_id}/steps": {
+      "get": {
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        },
+        "summary": "Get Run Steps",
+        "description": "Get the status of a run",
+        "operationId": "GetRunSteps",
+        "parameters": [
+          {
+            "name": "thread_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "run_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "default": "2024-02-15-preview"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "default": "application/json"
+          }
+        ]
+      }
+    },
+    "/openai/files/{file-id}/content": {
+      "get": {
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "fileContent": {
+                  "type": "string",
+                  "description": "fileContent"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get File Content",
+        "description": "Gets the content of the file specified by the given file-id. Files can be user uploaded content or generated by the service like result metrics of a fine-tune job.",
+        "operationId": "GetFileContent",
+        "parameters": [
+          {
+            "name": "file-id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "default": "2024-02-15-preview"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "default": "application/json"
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "default": "application/json"
+          }
+        ]
+      }
+    }
+  },
+  "definitions": {},
+  "parameters": {},
+  "responses": {},
+  "securityDefinitions": {
+    "api-key": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "api-key"
+    }
+  },
+  "security": [
+    {
+      "api-key": []
+    }
+  ],
+  "tags": []
+}
