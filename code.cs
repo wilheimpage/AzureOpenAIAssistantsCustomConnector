@@ -115,7 +115,7 @@ private async Task < HttpResponseMessage > GetAssistantsOperation()
         var jsonObject = JObject.Parse(responseString);
         
         var newJson = new JObject
-        // Rename "data" property to "messages"
+        // Rename "data" property to "assistants"
         {
             ["object"] = jsonObject["object"],
             ["assistants"] = jsonObject["data"],
